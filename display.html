@@ -1,0 +1,344 @@
+<html>
+  <head>
+    <title>Role</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script src="jquery-2.1.1.js"></script>
+    <style type="text/css">
+      body {
+      	font-family:"黑体"; 
+        font-size: 16px; 
+        font-style: normal; 
+        line-height: 17px;
+        background: black;
+      }
+
+      .head {
+      	width: 48.5%;
+      	height: 150%;
+      	float: left;
+      	margin-left: 10px;
+      	margin-top: 10px;
+      }
+
+      .side{
+      	width: 48.5%;
+      	height: 150%;
+      	float: left;
+      	margin-left: 10px;
+      	margin-top: -7px;
+      }
+
+      .role {
+      	border: 1px solid #CCC;
+      	width: 47.8%;
+      	height: 35%;
+      	float: left;
+      	margin-left: 10px;
+      	margin-top: 10px;
+      }
+
+      .role_one_head {
+      	height:100%;
+      	margin :-20px 0px;
+      }
+
+      .first_role {
+      	margin-top: -10px;
+      	background: #EE7700;
+      }
+
+      .second_role {
+      	background: #888800;
+      }
+
+      .three_role {
+      	background: #00AA55;
+      }
+
+      .four_role {
+      	background: #888800;
+
+      }
+
+      .five_role {
+      	background: #E93EFF;
+
+      }
+
+      .six_role {
+      	background: #FF7744;
+      }
+
+      .seven_role {
+        background: #009FCC;
+      }
+
+      .eight_role {
+      	background: #008844;
+      }
+
+
+      .second_role {
+      	margin-top: -10px;
+      	background: #00DDDD;
+      }
+
+      h2 {
+      	text-align: center;
+      	padding-top: 40px;
+      }
+
+      h1 {
+      	text-align: center;
+      	padding-top: 35px;
+      	line-height: 40px;
+      }
+
+      p {
+      	font-size: 23px;
+      	text-align: left;
+      	line-height: 23px;
+      }
+
+      .current_role {
+      	border: 1px solid #CCC;
+      	width: 100%;
+      	height: 71%;
+      	background: #5555FF;
+      	margin-top: -10px;
+      }
+
+      .people{
+      	border: 1px solid #CCC;
+      	width: 100%;
+      	height: 71%;
+      	background: #A20055;
+      	margin-top: 10px;
+
+      }
+
+      .people_img {
+      	width: 30%;
+      	height: 30%;
+      	float: left;
+      	margin-top: 30px;
+      	margin-left: 20px;
+      }
+
+      #change_role {
+      	width:230px;
+      	height: 70px;
+      	font-size: 25px;
+        -moz-border-radius: 5px;
+        -webkit-border-radius: 5px;
+        margin-top: 170px;
+        margin-left: 50px;
+      }
+
+      ul {
+      	font-size:23px;
+      	line-height:30px;
+      }
+
+    </style>
+    <script type="text/javascript">
+      var people = [
+        "Shi Jie",
+        "Yang Mengmeng",
+        "Wu Kun",
+        "Zhang Yiseng",
+        "Yan Yu",
+        "Ma Libin",
+        "Zhang Qingbo"
+      ];
+      var role = [
+        "Retro Runner aka",
+        "Wall Syncer aka",
+        "Organiser",
+        "Codediff Runner"
+      ];
+ 
+      $(document).ready(function(){       
+        //fill the id="people"
+       //  var text = "";
+	      // for(var i=0;i<people.length;i++){	        
+       //    text = text + ("<p>"+people[i]+"</p>");
+	      // }
+       //  $("#people").html(text);
+
+       //  //fill role
+       //  text = "";
+       //  for(i=0;i<role.length;i++){         
+       //    text = text + ("<p>"+role[i]+"</p>");
+       //  }
+       //  $("#role").html(text);
+
+        //fill current
+        $("#change_role").click(function(){
+          var fill_current_role = $(".current_role");
+          set_role_for_people(fill_current_role);
+        })
+      });
+
+      //get week in current year
+      Date.prototype.getWeekOfYear = function(weekStart) { 
+        //weekStart：每周开始于周几：周日：0，周一：1，周二：2 ...，默认为周日  
+        weekStart = (weekStart || 0) - 0;  
+        if(isNaN(weekStart) || weekStart > 6)  
+          weekStart = 0;    
+        var year = this.getFullYear();  
+        var firstDay = new Date(year, 0, 1);  
+        var firstWeekDays = 7 - firstDay.getDay() + weekStart;  
+        var dayOfYear = (((new Date(year, this.getMonth(), this.getDate())) - firstDay) / (24 * 3600 * 1000)) + 1;  
+        return Math.ceil((dayOfYear - firstWeekDays) / 7) + 1;  
+      }
+
+      //acquire week of a year
+      function getResult(){        
+        var tmp=new Date();  
+        var y=tmp.getFullYear();  
+        var m=tmp.getMonth()+1;  
+        var d=tmp.getDate();  
+        date=new Date(y,m,d); 
+        var weekOfYear = date.getWeekOfYear() 
+        return weekOfYear;        
+    }
+
+      //acquire seed of random
+      function getSeed(){
+        var seed = getResult();
+        if(seed%2 == 0){
+          return seed;
+        }else{
+          return seed-1;
+        }
+      }
+      
+      //fill current role
+      function set_role_for_people(xx){          
+        var current_people = [
+          "Yang Mengmeng",
+          "Zhang Yiseng",
+          "Yan Yu",
+          "Ma Libin"
+        ]; 
+        var tmp=new Date();  
+        var y=tmp.getFullYear();  
+        var m=tmp.getMonth()+1;  
+        var d=tmp.getDate();  
+        var date=new Date(y,m,d); 
+        var seed = getSeed();
+
+        seed = 50;
+        var x = Math.sin(seed++) * 10000;
+        text = "<h2>Subject Matter Expert aka : Shi Jie、 Zhang Qingbo</h2><h2>Secret Angel : Wu Kun</h2><h2>Cheerleader : Wu Kun</h2>";
+        var index = 0;
+        for(var i=0;i<role.length;i++){
+          index = Math.ceil((x - Math.floor(x))*current_people.length-1);
+          text = text + ("<h2>"+role[i]+" : "+current_people[index]+"</h2>")
+          current_people.splice(index, 1);
+          console.log(index);
+          console.log(current_people);
+        }
+        xx.html(text);
+      }
+      
+    </script>
+  </head>
+  <body>
+  	  <div class = "head">
+        <div class = "role first_role">
+          <div class = "role_one_head">
+            <h2>Subject Matter Expert</h2>
+            <ul>
+              <li>A person who is familiar with all the functionality of the project and is able to answer enquiries for project related questions</li>
+              <li>How does a piece of functionality work?</li>
+              <li>What configuration changes are required?</li>
+              <!-- <li>What changes would it require for production deployment?</li>
+              <li>When an action is perform on the frontend what changes happen at a database level?</li> -->
+            </ul>
+          </div>
+        </div>
+        <div class = "role second_role">
+          <div class = "role_one_head">
+            <h2>Retro Runner aka</h2>
+            <ul>
+              <li>A person who runs retro(personal</li>
+              <li>Project following up on retro actions</li>
+              <li>A person who actively find areas for improvement</li>
+            </ul>
+          </div>
+        </div>
+        <div class = "role three_role">
+          <div class = "role_one_head">
+            <h2>Wall Syncer aka</h2>
+            <ul>
+              <li>To sync up walls with Jira</li>
+              <li>To connect the always on</li>
+              <li>Ensure distributed meetings are running properly on VC</li>
+            </ul>
+          </div>
+        </div>
+        <div class = "role four_role">
+          <div class = "role_one_head">
+            <h2>Organiser</h2>
+            <ul>
+              <li>A person to organise code diff</li>
+              <li>Track issus found during code diff</li>
+            </ul>
+          </div>
+        </div>
+        <div class = "role five_role">
+          <div class = "role_one_head">
+            <h2>Codediff Runner</h2>
+            <ul>
+              <li>A person to organise meetings</li>
+              <li>Feedback retro, sessions...</li>
+            </ul>
+          </div>
+        </div>
+        <div class = "role six_role">
+          <div class = "role_one_head">
+            <h2>Secret Angel</h2>
+            <ul>
+              <li>A person who goes out of their way to help another person but don't let them know til end of month</li>
+              <li>Definition of help in what way</li>
+            </ul>
+          </div>
+        </div>
+        <div class = "role seven_role">
+          <div class = "role_one_head">
+            <h2>Cheerleader</h2>
+            <ul>
+              <li>Someone to make things more fun</li>
+              <li>Someone to measure/keep team morale high</li>
+            </ul>
+          </div>
+        </div>
+        <div class = "role eight_role">
+          <div class = "role_one_head">
+            
+            <button id="change_role">Press me</button>
+          </div>
+        </div>
+  	  </div>
+  	  <div class = "side">
+  	  	<br/>
+        <div class = "current_role" style="text-align:center;">
+          
+        </div>
+        <div class = "people">
+          <div class="people_img">
+            <img src="img/111.jpg">
+          </div>
+          <div class="people_img"><img src="img/111.jpg"></div>
+          <div class="people_img"><img src="img/111.jpg"></div>
+          <div class="people_img"><img src="img/111.jpg"></div>
+          <div class="people_img"><img src="img/111.jpg"></div>
+          <div class="people_img"><img src="img/111.jpg"></div>
+          <div class="people_img"></div>
+          <div class="people_img"><img src="img/111.jpg"></div>
+        </div>
+  	  </div>
+    </body>
+</html>
