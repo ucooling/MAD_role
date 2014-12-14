@@ -157,27 +157,8 @@
       ];
  
       $(document).ready(function(){       
-        //fill the id="people"
-       //  var text = "";
-	      // for(var i=0;i<people.length;i++){	        
-       //    text = text + ("<p>"+people[i]+"</p>");
-	      // }
-       //  $("#people").html(text);
-
-       //  //fill role
-       //  text = "";
-       //  for(i=0;i<role.length;i++){         
-       //    text = text + ("<p>"+role[i]+"</p>");
-       //  }
-       //  $("#role").html(text);
-
-        //fill current
         var fill_current_role = $(".current_role");
         set_role_for_people(fill_current_role);
-        // $("#change_role").click(function(){
-        //   var fill_current_role = $(".current_role");
-        //   set_role_for_people(fill_current_role);
-        // })
       });
 
       //get week in current year
@@ -196,11 +177,16 @@
       //acquire week of a year
       function getResult(){        
         var tmp=new Date();  
-        var y=tmp.getFullYear();  
-        var m=tmp.getMonth()+1;  
-        var d=tmp.getDate();  
-        date=new Date(y,m,d); 
-        var weekOfYear = date.getWeekOfYear() 
+        var y=tmp.getFullYear();
+        console.log(y);  
+        var m=tmp.getMonth();
+        console.log(m);    
+        var d=tmp.getDate(); 
+        console.log(d);   
+        var date=new Date(y,m,d); 
+        console.log(date+"ddddddddddd");
+        var weekOfYear = date.getWeekOfYear(0); 
+        console.log(weekOfYear);
         return weekOfYear;        
     }
 
@@ -229,13 +215,12 @@
           var d=tmp.getDate();  
           var date=new Date(y,m,d); 
           var seed = getSeed();
-
-          seed = 50;
           var x = Math.sin(seed++) * 10000;
           text = "<h2>Subject Matter Expert aka : Shi Jie、 Zhang Qingbo</h2><h2>Secret Angel : Wu Kun</h2><h2>Cheerleader : Wu Kun</h2>";
           var index = 0;
           for(var i=0;i<role.length;i++){
             index = Math.ceil((x - Math.floor(x))*current_people.length-1);
+            console.log(index)
             text = text + ("<h2>"+role[i]+" : "+current_people[index]+"</h2>")
             current_people.splice(index, 1);
             console.log(index);

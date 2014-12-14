@@ -3,6 +3,7 @@
     <title>Role</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />>
     <script src="jquery-2.1.1.js"></script>
+    <script src="seedrandom.min.js"></script>
     <style type="text/css">
       body {
       	font-family:"黑体"; 
@@ -30,11 +31,22 @@
 
       .role_one {
         background: #EE7700;
-        height: 23%;
+        height: 30%;
         margin-top: -10px;
       }
 
       .people_img_leader {
+        width:160px;
+        height: 160px; 
+        -moz-border-radius: 80px; 
+        -webkit-border-radius: 80px; 
+        border-radius: 80px; 
+        margin-left: 20px;
+        background: url('img/shijie.jpg') no-repeat center center;
+        float: left;
+      }
+
+      .people_img_bean {
         width:160px;
         height: 160px; 
         -moz-border-radius: 80px; 
@@ -100,6 +112,11 @@
         margin-left: 50px;
       }
 
+      .role_bean {
+        background: #888800;
+        height: 11%;
+      }
+
       .role_two {
         background: #888800;
         height: 11%;
@@ -143,11 +160,14 @@
 
     </style>
     <script type="text/javascript">
+      var array = new Array();
       var role = [
         "Retro Runner aka",
         "Wall Syncer aka",
         "Organiser",
-        "Code diff Runner"
+        "Code diff Runner",
+        "Secret Angel",
+        "Cheerleader"
       ];
 
       var role_hash = {};
@@ -155,29 +175,13 @@
       role_hash["Wall Syncer aka"] = "wall";
       role_hash["Organiser"] = "organiser";
       role_hash["Code diff Runner"] = "codediff";
+      role_hash["Secret Angel"] = "secret";
+      role_hash["Cheerleader"] = "cheerleader";
+
  
       $(document).ready(function(){       
-        //fill the id="people"
-       //  var text = "";
-	      // for(var i=0;i<people.length;i++){	        
-       //    text = text + ("<p>"+people[i]+"</p>");
-	      // }
-       //  $("#people").html(text);
-
-       //  //fill role
-       //  text = "";
-       //  for(i=0;i<role.length;i++){         
-       //    text = text + ("<p>"+role[i]+"</p>");
-       //  }
-       //  $("#role").html(text);
-
-        //fill current
         var fill_current_role = $(".current_role");
         set_role_for_people(fill_current_role);
-        // $("#change_role").click(function(){
-        //   var fill_current_role = $(".current_role");
-        //   set_role_for_people(fill_current_role);
-        // })
       });
 
       //get week in current year
@@ -197,22 +201,29 @@
       function getResult(){        
         var tmp=new Date();  
         var y=tmp.getFullYear();  
-        var m=tmp.getMonth()+1;  
+        var m=tmp.getMonth();  
         var d=tmp.getDate();  
         var date=new Date(y,m,d); 
-        var weekOfYear = date.getWeekOfYear();      
+        var weekOfYear = date.getWeekOfYear();     
         return weekOfYear;
+
 
     }
 
-      //acquire seed of random
       function getSeed(){
         var seed = getResult();
+        var week;
         if(seed%2 == 0){
           return seed;
         }else{
           return seed-1;
         }
+      }
+
+
+      function getTruthSeed(){
+        var seed = getSeed();
+        Math.seedrandom(seed);       
       }
       
       //fill current role
@@ -222,7 +233,9 @@
           "Yang Mengmeng",
           "Zhang Yiseng",
           "Yan Yu",
-          "Ma Libin"
+          "Ma Libin",
+          "Chen Liang",
+          "WuXiang"
           ]; 
 
           var current_people_hash = {};
@@ -230,23 +243,21 @@
           current_people_hash["Yan Yu"] = "222";
           current_people_hash["Yang Mengmeng"] = "333";
           current_people_hash["Ma Libin"] = "444";
-
-          var tmp=new Date();  
-          var y=tmp.getFullYear();  
-          var m=tmp.getMonth()+1;  
-          var d=tmp.getDate();  
-          var date=new Date(y,m,d); 
-          var seed = getSeed();
-          var x = Math.sin(seed++) * 5;
-          var index = 0;
+          current_people_hash["Chen Liang"] = "555";
+          current_people_hash["WuXiang"] = "666";
+          getTruthSeed();
           for(var i=0;i<role.length;i++){
-            index = Math.ceil((x - Math.floor(x))*current_people.length-1);
-            var xx = $("#"+role_hash[role[i]]);
-            var yy = $("."+role_hash[role[i]])
+            var index = Math.ceil(Math.random()*(current_people.length));
+            console.log(index);
+            var xx = $("#"+role_hash[role[index]]);
+            var yy = $("."+role_hash[role[index]]);
             var image = current_people_hash[current_people[index]];
             xx.css("background","url(img/"+image+".jpg) no-repeat center center");
             yy.html(current_people[index]);
-            current_people.splice(index, 1);  
+            console.log(current_people);
+            current_people.splice(index, 1);
+
+             
           }
         },1000);                  
       }
@@ -264,19 +275,35 @@
       
       <div class="people_role" id="people_role">
         <h2>Subject Matter Expert</h2>
+          <ul>
+            <li>A person who is familiar with all the functionality of the project and is able<br/> to answer enquiries for project related questions</li>
+            <li>How does a piece of functionality work?</li>
+            <li>What configuration changes are required?</li>
+            <li>What changes would it require for production deployment?</li>
+            <li>When an action is perform on the frontend what changes happen at a database level?</li>
+          </ul>
+      </div>
+    </div>
+    
+    <div class="role role_bean">
+      <div class="people_bean">
+        <div class="people_img_bean"></div>
+        <h3 class="bean">Arthur</h3>
+      </div>      
+      <div class="people_role" id="people_role">
+        <h2>Beans Manager</h2>
             <ul>
-              <li>A person who is familiar with all the functionality of the project and is able<br/> to answer enquiries for project related questions</li>
-              <li>How does a piece of functionality work?</li>
-              <li>What configuration changes are required?</li>
-              <li>What changes would it require for production deployment?</li>
-              <li>When an action is perform on the frontend what changes happen at a database level?</li>
+              <li>A person who goes out of their way to help another person<br/> but don't let them know til end of month</li>
+              <li>Definition of help in what way</li>
             </ul>
       </div>
     </div>
-    <div class="role role_two" id="role_two">
+
+
+    <div class="role role_two">
       <div class="people">
-        <div class="people_img_secret"></div>
-        <h3>Wu Kun</h3>
+        <div class="people_img" id="secret"></div>
+        <h3 class="secret"></h3>
       </div>      
       <div class="people_role" id="people_role">
         <h2>Secret Angel</h2>
@@ -288,8 +315,8 @@
     </div>
     <div class="role role_three">
       <div class="people">
-        <div class="people_img_cheerleader"></div>   
-        <h3>Wu Kun</h3>
+        <div class="people_img" id="cheerleader"></div>   
+        <h3 class="cheerleader"></h3>
       </div>
       <div class="people_role" id="people_role">
         <h2>Cheerleader</h2>
