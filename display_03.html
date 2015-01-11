@@ -251,7 +251,6 @@
 
       function getSeed(){
         var seed = getResult();
-        seed = 79;
         if(seed%2 == 0){
           return seed;
         }else{
@@ -274,8 +273,7 @@
             var haha = [];
             for (var j=0;j<count;j++){ 
             originalArray[j]=j+1; 
-            } 
-            var d1=new Date().getTime(); 
+            }
             for (var num,k=0;k<count;k++){ 
             do{ 
             num=Math.floor(Math.random()*count); 
@@ -283,15 +281,10 @@
             haha.push(originalArray[num]-1); 
             originalArray[num]=null; 
             }
-            console.log(haha);
           for(var i=0;i<6;i++){
-            console.log(haha[i]);
             var xx = $("#"+role_hash[role[i]]);
             var yy = $("."+role_hash[role[i]]);
             var image = current_people_hash[current_people[haha[i]]];
-            console.log(image);
-            console.log(xx);
-            console.log(yy);
             xx.css("background","url(img/"+image+".jpg) no-repeat center center");
             yy.html(current_people[haha[i]]);         
           }
