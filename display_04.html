@@ -1,0 +1,412 @@
+<html>
+  <head>
+    <title>Role</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />>
+    <script src="jquery-2.1.1.js"></script>
+    <script src="seedrandom.min.js"></script>
+    <style type="text/css">
+      body {
+      	font-family:"黑体"; 
+        font-size: 62.5%; 
+        font-style: normal; 
+        line-height: 17px;
+        background: black;
+        margin: 0;
+        padding: 0;
+      }
+
+      .container {
+        margin: 0 auto;
+        width: 100%;
+      } 
+
+      .role {
+        width: 100%;
+        margin: 0 auto;
+        height: auto;
+        position: relative;
+        opacity: 1.5;
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+        border-bottom-right-radius: 20px;
+        border-bottom-left-radius:  20px;
+        margin-bottom: 10px;
+      }
+
+      .people {
+        width: 30%;
+        float: left;
+        margin: 0 auto;
+        float: left;
+      } 
+
+      .people_role {
+        width: 70%;
+        float: right;
+      } 
+
+      /* leader role css */
+
+      .role_one {
+        background-color: #EE7700;
+        height: 14%;
+        opacity: 1.5;
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+        border-bottom-right-radius: 20px;
+        border-bottom-left-radius:  20px;
+        margin-bottom: 10px;
+      }
+
+      .people_img_leader_one {
+        width:160px;
+        height: 160px; 
+        -moz-border-radius: 80px; 
+        -webkit-border-radius: 80px; 
+        border-radius: 80px; 
+        margin-left: 20px;
+        background: url('img/shijie.jpg') no-repeat center center;
+        float: left;
+        position: relative;
+        margin-top: 10px;
+      }
+
+      .shijie{
+        position: absolute;
+        top:10%;
+        left: 85px;
+      }
+
+      .people_img_leader_two {
+        width:160px;
+        height: 160px; 
+        -moz-border-radius: 80px; 
+        -webkit-border-radius: 80px; 
+        border-radius: 80px; 
+        background: url('img/qingbo.jpg') no-repeat center center;
+        float: left;
+        margin-top: 10px;
+      }
+
+      .qingbo {
+        position: absolute;
+        top:10%;
+        left: 235px;
+      }
+
+      /* beans manager css*/
+
+      .role_two {
+        background-color: #888800;
+        height: 11.5%;
+        position: relative;
+      }
+
+      .people_img_bean {
+        width:160px;
+        height: 160px; 
+        -moz-border-radius: 80px; 
+        -webkit-border-radius: 80px; 
+        border-radius: 80px; 
+        margin-left: 6%;
+        background: url('img/arthur.jpg') no-repeat center center;
+        float: left;
+      }
+
+      .arthur {
+        position: absolute;
+        top:77%;
+        left: 135px;
+      }
+
+      /* other cycle*/
+
+      .role_three {
+        background: #00AA55;
+        height: 11.5%;
+      }
+
+      .role_four {
+        background: #6633CC;
+        height: 11.5%;
+
+      }
+
+      .role_five {
+        background: #E93EFF;
+        height: 11.5%;
+      }
+
+      .role_six {
+        background: #FF7744;
+        height: 11.5%;
+      }
+
+      .role_seven {
+        background: #009FCC;
+        height: 11.5%;
+      }
+
+      .role_eight {
+        background: #9933CC;
+        height: 11.5%;
+      }
+
+      .people_img {
+        width:160px;
+        height: 160px; 
+        -moz-border-radius: 80px; 
+        -webkit-border-radius: 80px; 
+        border-radius: 80px; 
+        margin-left: 23%;
+        background: url('img/shijie.jpg') no-repeat center center;
+        margin-top: 5px;
+      }
+
+      .cycle {
+        position: absolute;
+        top:77%;
+        left: 124px;
+      }
+
+      ul {
+        font-size: 20px;
+        line-height: 1.3;
+      }
+
+      h2 {
+        font-size: 25px;
+      }
+
+      h3 {
+        font-size: 15px;
+      }
+
+    </style>
+    <script type="text/javascript">
+      var role = [
+            "Retro Runner aka",
+            "Wall Syncer aka",
+            "Organiser",
+            "Code diff Runner",
+            "Secret Angel",
+            "Cheerleader"
+          ];
+
+          var role_hash = {};
+          role_hash["Retro Runner aka"] = "retro";
+          role_hash["Wall Syncer aka"] = "wall";
+          role_hash["Organiser"] = "organiser";
+          role_hash["Code diff Runner"] = "codediff";
+          role_hash["Secret Angel"] = "secret";
+          role_hash["Cheerleader"] = "cheerleader";
+
+          var current_people = [
+          "Yang Mengmeng",
+          "Zhang Yiseng",
+          "Yan Yu",
+          "Ma Libin",
+          "Chen Liang",
+          "WuXiang"
+          ]; 
+
+          var current_people_hash = {};
+          current_people_hash["Zhang Yiseng"] = "111";
+          current_people_hash["Yan Yu"] = "222";
+          current_people_hash["Yang Mengmeng"] = "333";
+          current_people_hash["Ma Libin"] = "444";
+          current_people_hash["Chen Liang"] = "555";
+          current_people_hash["WuXiang"] = "666";
+ 
+      $(document).ready(function(){       
+        var fill_current_role = $(".current_role");
+        set_role_for_people(fill_current_role);
+      });
+
+      //get week in current year
+      Date.prototype.getWeekOfYear = function(weekStart) { 
+        //weekStart：每周开始于周几：周日：0，周一：1，周二：2 ...，默认为周日  
+        weekStart = (weekStart || 0) - 0;  
+        if(isNaN(weekStart) || weekStart > 6)  
+          weekStart = 0;    
+        var year = this.getFullYear();  
+        var firstDay = new Date(year, 0, 1);  
+        var firstWeekDays = 7 - firstDay.getDay() + weekStart;  
+        var dayOfYear = (((new Date(year, this.getMonth(), this.getDate())) - firstDay) / (24 * 3600 * 1000)) + 1;  
+        return Math.ceil((dayOfYear - firstWeekDays) / 7) + 1;  
+      }
+
+      //acquire week of a year
+      function getResult(){        
+        var tmp=new Date();  
+        var y=tmp.getFullYear();  
+        var m=tmp.getMonth();  
+        var d=tmp.getDate();  
+        var date=new Date(y,m,d); 
+        var weekOfYear = date.getWeekOfYear();     
+        return weekOfYear;
+
+
+    }
+
+      function getSeed(){
+        var seed = getResult();
+        if(seed%2 == 0){
+          return seed;
+        }else{
+          return seed-1;
+        }
+      }
+
+
+      function getTruthSeed(){
+        var seed = getSeed();
+        Math.seedrandom(seed);       
+      }
+      
+      //fill current role
+      function set_role_for_people(xx){
+        var timer = setInterval(function(){
+          getTruthSeed();
+          var count=6; 
+            var originalArray=new Array;
+            var haha = [];
+            for (var j=0;j<count;j++){ 
+            originalArray[j]=j+1; 
+            }
+            for (var num,k=0;k<count;k++){ 
+            do{ 
+            num=Math.floor(Math.random()*count); 
+            }while(originalArray[num]==null); 
+            haha.push(originalArray[num]-1); 
+            originalArray[num]=null; 
+            }
+          for(var i=0;i<6;i++){
+            var xx = $("#"+role_hash[role[i]]);
+            var yy = $("."+role_hash[role[i]]);
+            var image = current_people_hash[current_people[haha[i]]];
+            xx.css("background","url(img/"+image+".jpg) no-repeat center center");
+            yy.html(current_people[haha[i]]);         
+          }
+        },1000);                  
+      }      
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="role_one">
+        <div class="people">
+          <div class="people_img_leader_one"></div>
+          <h3 class="shijie">ShiJie</h3>
+          <div class="people_img_leader_two"></div>
+          <h3 class="qingbo">QingBo</h3>
+        </div>
+        <div class="people_role" id="people_role">
+          <h2>Subject Matter Expert</h2>
+          <ul>
+            <li>A person who is familiar with all the functionality of the project and is able<br/> to answer enquiries for project related questions</li>
+            <li>How does a piece of functionality work?</li>
+            <li>What configuration changes are required?</li>
+            <li>What changes would it require for production deployment?</li>
+            <li>When an action is perform on the frontend what changes happen at a database level?</li>
+          </ul>
+        </div>
+      </div>
+      <div class="role role_two">
+        <div class="people" style="margin-left:54px;">
+          <div class="people_img_bean"></div>
+          <h3 class="arthur">Arthur</h3>
+        </div>
+        <div class="people_role" id="people_role" style="margin-top:-13%">
+          <h2>Beans counter</h2>
+          <ul>
+            <li>A person to collect all beans from all who particapte in Merit beans</li>
+            <li>A person to remind people submit their beans</li>
+            <li>A person to aggregate beans after submition and summarised results then passed on to team</li>
+          </ul>
+        </div>
+      </div>
+      <div class="role role_three">
+        <div class="people">
+          <div class="people_img" id="codediff"></div>
+          <h3 class="codediff cycle"></h3>
+        </div>
+        <div class="people_role" id="people_role">
+          <h2>Codediff Runner</h2>
+            <ul>
+              <li>A person to organise meetings</li>
+              <li>Feedback retro, sessions...</li>
+            </ul>
+        </div>
+      </div>
+      <div class="role role_four">
+        <div class="people">
+          <div class="people_img" id="retro"></div>
+          <h3 class="retro cycle"></h3>
+        </div>
+        <div class="people_role" id="people_role">
+          <h2>Retro Runner</h2>
+            <ul>
+              <li>A person who runs retro(personal, project)</li>
+              <li>Following up on retro actions</li>
+              <li>A person who actively find areas for improvement</li>
+            </ul>
+        </div>
+      </div>
+      <div class="role role_five">
+        <div class="people">
+          <div class="people_img" id="wall"></div>
+          <h3 class="wall cycle"></h3>
+        </div>
+        <div class="people_role" id="people_role">
+          <h2>Wall Syncer</h2>
+            <ul>
+              <li>To sync up walls with Jira</li>
+              <li>To connect the always on</li>
+              <li>Ensure distributed meetings are running properly on VC</li>
+            </ul>
+        </div>
+      </div>
+      <div class="role role_six">
+        <div class="people">
+          <div class="people_img" id="secret"></div>
+          <h3 class="secret cycle"></h3>
+        </div>
+        <div class="people_role" id="people_role">
+          <h2>Secret Angel</h2>
+            <ul>
+              <li>A person who goes out of their way to help another person<br/> but don't let them know til end of month</li>
+              <li>Definition of help in what way</li>
+            </ul>
+        </div>
+      </div>
+      <div class="role role_seven">
+        <div class="people">
+          <div class="people_img" id="organiser"></div>
+          <h3 class="organiser cycle"></h3>
+        </div>
+        <div class="people_role" id="people_role">
+          <h2>Organiser</h2>
+            <ul>
+              <li>A person to organise code diff</li>
+              <li>Track issus found during code diff</li>
+            </ul>
+        </div>
+      </div>
+
+      <div class="role role_eight">
+        <div class="people">
+          <div class="people_img" id="cheerleader"></div>
+          <h3 class="cheerleader cycle"></h3>
+        </div>
+        <div class="people_role" id="people_role">
+          <h2>Cheerleader</h2>
+            <ul>
+              <li>Someone to make things more fun</li>
+              <li>Someone to measure/keep team morale high</li>
+            </ul>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
