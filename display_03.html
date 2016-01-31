@@ -65,7 +65,7 @@
         -webkit-border-radius: 80px; 
         border-radius: 80px; 
         margin-left: 20px;
-        background: url('img/shijie.jpg') no-repeat center center;
+        background: url('img/wenbo.jpg') no-repeat center center;
         float: left;
         position: relative;
         margin-top: 10px;
@@ -92,31 +92,6 @@
         position: absolute;
         top:10%;
         left: 235px;
-      }
-
-      /* beans manager css*/
-
-      .role_two {
-        background-color: #888800;
-        height: 11.5%;
-        position: relative;
-      }
-
-      .people_img_bean {
-        width:160px;
-        height: 160px; 
-        -moz-border-radius: 80px; 
-        -webkit-border-radius: 80px; 
-        border-radius: 80px; 
-        margin-left: 6%;
-        background: url('img/arthur.jpg') no-repeat center center;
-        float: left;
-      }
-
-      .arthur {
-        position: absolute;
-        top:77%;
-        left: 135px;
       }
 
       /* other cycle*/
@@ -189,8 +164,8 @@
             "Wall Syncer aka",
             "Organiser",
             "Code diff Runner",
-            "Secret Angel",
-            "Cheerleader"
+            "Animal Feeder",
+            "Order Lunch"
           ];
 
           var role_hash = {};
@@ -198,25 +173,26 @@
           role_hash["Wall Syncer aka"] = "wall";
           role_hash["Organiser"] = "organiser";
           role_hash["Code diff Runner"] = "codediff";
-          role_hash["Secret Angel"] = "secret";
-          role_hash["Cheerleader"] = "cheerleader";
+          role_hash["Animal Feeder"] = "animal";
+          role_hash["Order Lunch"] = "lunch";
+
 
           var current_people = [
           "Yang Mengmeng",
-          "Zhang Yiseng",
-          "Yan Yu",
           "Ma Libin",
-          "Chen Liang",
-          "WuXiang"
+          "Zhao Mengru",
+          "Liu Jing",
+          "Zhou Jing",
+          "Sun Jing"
           ]; 
 
           var current_people_hash = {};
-          current_people_hash["Zhang Yiseng"] = "111";
-          current_people_hash["Yan Yu"] = "222";
+          current_people_hash["Zhao Mengru"] = "111";
+          current_people_hash["Liu Jing"] = "222";
           current_people_hash["Yang Mengmeng"] = "333";
           current_people_hash["Ma Libin"] = "444";
-          current_people_hash["Chen Liang"] = "555";
-          current_people_hash["WuXiang"] = "666";
+          current_people_hash["Zhou Jing"] = "555";
+          current_people_hash["Sun Jing"] = "666";
  
       $(document).ready(function(){       
         var fill_current_role = $(".current_role");
@@ -297,7 +273,7 @@
       <div class="role_one">
         <div class="people">
           <div class="people_img_leader_one"></div>
-          <h3 class="shijie">ShiJie</h3>
+          <h3 class="shijie">WenBo</h3>
           <div class="people_img_leader_two"></div>
           <h3 class="qingbo">QingBo</h3>
         </div>
@@ -309,20 +285,6 @@
             <li>What configuration changes are required?</li>
             <li>What changes would it require for production deployment?</li>
             <li>When an action is perform on the frontend what changes happen at a database level?</li>
-          </ul>
-        </div>
-      </div>
-      <div class="role role_two">
-        <div class="people" style="margin-left:54px;">
-          <div class="people_img_bean"></div>
-          <h3 class="arthur">Arthur</h3>
-        </div>
-        <div class="people_role" id="people_role" style="margin-top:-13%">
-          <h2>Beans counter</h2>
-          <ul>
-            <li>A person to collect all beans from all who particapte in Merit beans</li>
-            <li>A person to remind people submit their beans</li>
-            <li>A person to aggregate beans after submition and summarised results then passed on to team</li>
           </ul>
         </div>
       </div>
@@ -369,7 +331,7 @@
       </div>
       <div class="role role_six">
         <div class="people">
-          <div class="people_img" id="secret"></div>
+          <div class="people_img" id="lunch"></div>
           <h3 class="secret cycle"></h3>
         </div>
         <div class="people_role" id="people_role">
@@ -396,7 +358,7 @@
 
       <div class="role role_eight">
         <div class="people">
-          <div class="people_img" id="cheerleader"></div>
+          <div class="people_img" id="animal"></div>
           <h3 class="cheerleader cycle"></h3>
         </div>
         <div class="people_role" id="people_role">
